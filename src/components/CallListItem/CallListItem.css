@@ -1,0 +1,17 @@
+.call-item_card{
+    font-size: 1rem;
+    font-family:"Antipasto", sans-serif;
+    background-color: #ccd6cb;
+    border: #2ac41f 2px solid;
+    border-radius: 2px;
+}
+
+.call-item_card--date{
+    font-weight:700;
+    font-family: "Antipasto", sans-serif;
+}
+
+.call-item_card--from{
+    font-weight:700;
+    font-family: "Antipasto", sans-serif;
+}

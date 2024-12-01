@@ -1,17 +1,22 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom/client';
+import {CallListItem} from './components/CallListItem/CallListItem.jsx'
 
 import Header from './Header.jsx';
 
 const App = () => {
   return (
-    <div className='container'>
+    <div id='app' className='container'>
       <Header/>
-      <div className="container-view">Some activities should be here</div>
+      <CallListItem/>
+      {/* <div className="container-view">Some activities should be here</div> */}
+
     </div>
   );
 };
 
-ReactDOM.render(<App/>, document.getElementById('app'));
+
+const root = ReactDOM.createRoot(document.getElementById('app'));
+root.render(<App />);
 
 export default App;

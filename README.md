@@ -75,4 +75,4 @@ The API is hosted on a free server, which is why the first time you call the API
 
 # Process:
 1. Build rough design on Figma
-2. Had to install/fix some dependencies (webpack, react versions) in order to get the deme/skeleton app to run. 
+2. Had to install/fix some dependencies (webpack, react versions) in order to get the demo/skeleton app to run.
