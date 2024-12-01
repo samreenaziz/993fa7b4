@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import MockProfilePic from "../../assets/images/profile_pic.jpg"
 
 export default function CallNav({setCallsView, callsView}) {
@@ -32,7 +32,7 @@ export default function CallNav({setCallsView, callsView}) {
         backgroundOpacity: "80%",
         color:"rgb(66, 66, 66)",
         listStyle:"none",
-        borderBottom: callsHovered || callsActive ? "0.35rem solid purple" : "transparent",
+        borderBottom: callsHovered || callsActive || callsView ? "0.35rem solid purple" : "transparent",
         cursor: "pointer",
 
     };
@@ -46,7 +46,7 @@ export default function CallNav({setCallsView, callsView}) {
         backgroundOpacity: "80%",
         color:"rgb(66, 66, 66)",
         listStyle:"none",
-        borderBottom: archivedHovered || archivedActive ? "0.35rem solid purple" : "transparent",
+        borderBottom: archivedHovered || archivedActive || !callsView ? "0.35rem solid purple" : "transparent",
         cursor: "pointer",
 
     };
@@ -61,31 +61,41 @@ export default function CallNav({setCallsView, callsView}) {
 
     }
 
-  return (
-    <div style={{display:"flex", flexDirection:"row", gap:"3rem", alignItems:"center"}}>
-        <ul style={navStyle}>
-            <li style={callItemStyle}
-                onMouseEnter={() => setCallsHovered(true)}
-                onMouseLeave={() => setCallsHovered(false)}
-                onClick={() => {setCallsActive(true); setArchivedActive(false); setCallsView(true)}}
-            >
-                Calls
-            </li>
-            <li style={archiveItemStyle}
-                onMouseEnter={() => setArchivedHovered(true)}
-                onMouseLeave={() => setArchivedHovered(false)}
-                onClick={() => {setArchivedActive(true); setCallsActive(false); setCallsView(false)}}
+    useEffect(() => {
+        if (callsView) {
+            setCallsActive(true);
+            setArchivedActive(false);
+        } else {
+            setCallsActive(false);
+            setArchivedActive(true);
+        }
+    }, [callsView]);
 
-            >
-                Archived
-            </li>
-        </ul>
-        <div style={{display:"column", flexDirection:"row", justifyItems:"center"}}>
-            <div style={profilePicDiv}></div>
-            <p style={{fontSize:"1.5rem", color:"rgb(66, 66, 66)", fontFamily: "'Poppins', sans-serif", marginTop:"0.50rem"}}>Account</p>
+    return (
+        <div style={{display:"flex", flexDirection:"row", gap:"3rem", alignItems:"center"}}>
+            <ul style={navStyle}>
+                <li style={callItemStyle}
+                    onMouseEnter={() => setCallsHovered(true)}
+                    onMouseLeave={() => setCallsHovered(false)}
+                    onClick={() => {setCallsActive(true); setArchivedActive(false); setCallsView(true)}}
+                >
+                    Calls
+                </li>
+                <li style={archiveItemStyle}
+                    onMouseEnter={() => setArchivedHovered(true)}
+                    onMouseLeave={() => setArchivedHovered(false)}
+                    onClick={() => {setArchivedActive(true); setCallsActive(false); setCallsView(false)}}
+
+                >
+                    Archived
+                </li>
+            </ul>
+            <div style={{display:"column", flexDirection:"row", justifyItems:"center"}}>
+                <div style={profilePicDiv}></div>
+                <p style={{fontSize:"1.5rem", color:"rgb(66, 66, 66)", fontFamily: "'Poppins', sans-serif", marginTop:"0.50rem"}}>Account</p>
+            </div>
         </div>
-    </div>
-  )
+    )
 }
 
 

@@ -28,33 +28,61 @@ export default function ActivityFeed({callsView, setCallsView}) {
     const archiveAllCallsHandler = () => {
         setArchivedCalls((prevArchivedCalls) => [...prevArchivedCalls, ...unarchivedCalls]);
         setUnarchivedCalls([]);
+        setCallsView(false);
     };
 
     const unarchiveAllCallsHandler = () => {
         setUnarchivedCalls((prevUnarchivedCalls) => [...prevUnarchivedCalls, ...archivedCalls]);
         setArchivedCalls([]);
+        setCallsView(true)
     };
 
     useEffect(() => {
         if (unarchivedCalls.length === 0) {
             setCallsView(false);
         }
-    }, [unarchivedCalls, setCallsView]);
+        else if (archivedCalls.length === 0){
+            setCallsView(true)
+        }
+    }, [unarchivedCalls, archivedCalls, setCallsView]);
 
   return (
         <div styles={{display:"flex"}}>
             <div>
                 <h1 style={{color:"#424242", fontWeight:"500", fontFamily: "'Poppins', sans-serif", display:"flex", textAlign:"center", fontSize:"3rem", justifyContent:"center"}}>
-                    {callsView ? "Who's Calling?" : "Archived"}
+                    {callsView ? "Who's Calling You?" : "Archived"}
                 </h1>
-                <div>
-                    {unarchivedCalls.length >= 0 && callsView ? (<Button key="#archive-all" variant="outlined" color="error" onClick={archiveAllCallsHandler}>Archive All</Button>) : (unarchivedCalls.length >= 0 &&
-                        (<Button color="success" key="#unarchive-all" variant="outlined" onClick={unarchiveAllCallsHandler}>Unarchive All</Button>
-                    )) }
+                <div style={{display:"flex", flexDirection:"row", justifyContent:"right", paddingRight:"2rem"}}>
+                {callsView && unarchivedCalls.length > 0 && (
+                    <Button key="#archive-all" style={{ fontSize: "1.25rem" }} variant="outlined" color="error" onClick={archiveAllCallsHandler}>
+                        Archive All
+                    </Button>
+                )}
+
+                {!callsView && archivedCalls.length > 0 && (
+                    <Button key="#unarchive-all" style={{ fontSize: "1.25rem" }} variant="outlined" color="error" onClick={unarchiveAllCallsHandler}>
+                        Unarchive All
+                    </Button>
+                )}
+
+
                 </div>
-                {unarchivedCalls.map((call) => (
+                {callsView ? unarchivedCalls.map((call) => (
                     <CallListItem key={call.id} call={call} archiveHandler={archiveHandler} showArchiveButton={true} />
-                ))}
+                )) : archivedCalls.map((call) => (
+                    <CallListItem key={call.id} call={call} archiveHandler={unarchiveHandler} showArchiveButton={false} />
+                ))
+                }
+
+                { callsView && unarchivedCalls.length == 0 &&
+                (<p style={{color:"#424242", fontWeight:"400", fontFamily: "'Poppins', sans-serif", padding: "0rem 6rem", display:"flex", textAlign:"center", fontSize:"2rem", justifyContent:"center"}}>
+                    No call history here! Check your archived messages, or check back later for more updates.
+                </p>)}
+
+                { !callsView && archivedCalls.length == 0 &&
+                (<p style={{color:"#424242", fontWeight:"400", fontFamily: "'Poppins', sans-serif", padding: "0rem 6rem", display:"flex", textAlign:"center", fontSize:"2rem", justifyContent:"center"}}>
+                    No archived calls to see here!
+                </p>)}
             </div>
         </div>
     );
