@@ -1,15 +1,14 @@
-import React from 'react';
+import React, {useState} from 'react';
 import ReactDOM from 'react-dom/client';
 import ActivityFeed from './components/ActivityFeed/ActivityFeed.jsx'
-
 import Header from './Header.jsx';
 
 const App = () => {
+  const [callsView, setCallsView] = useState(true);
   return (
     <div id='app' className='container'>
-      <Header/>
-      <ActivityFeed/>
-      {/* <div className="container-view">Some activities should be here</div> */}
+      <Header setCallsView={setCallsView} callsView={callsView}/>
+      <ActivityFeed callsView={callsView} setCallsView={setCallsView}/>
 
     </div>
   );

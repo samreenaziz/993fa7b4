@@ -23,6 +23,18 @@ module.exports = {
           loader: 'babel-loader'
         }
       },
+      {
+        test: /\.(png|jpe?g|gif|svg)$/i,
+        use: [
+            {
+                loader: 'url-loader',
+                options: {
+                    limit: 8192, // Images below 8KB will be inlined as Base64 URIs
+                    name: 'assets/images/[name].[hash].[ext]',
+                },
+            },
+        ],
+      },
     ]
   },
   plugins: [
