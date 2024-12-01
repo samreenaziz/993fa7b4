@@ -9,7 +9,7 @@ The app should have the following features:
 - A button to archive all calls in the activity feed
 - A button to unarchive all calls in the archived calls tab
 
-Show us what you can do in 48 hours. You will be assessed on the following parameters: 
+Show us what you can do in 48 hours. You will be assessed on the following parameters:
 - Focus on design sense (Pay attention to the UI/UX and transitions)
 - React Best Practices
 - Code Readability and Maintainability
@@ -71,3 +71,8 @@ The API is hosted on a free server, which is why the first time you call the API
 - **duration** - duration of a call (in seconds)
 - **is_archived** - call is archived or not
 - **call_type** - can be a `missed`, `answered` or `voicemail` call.
+
+
+# Process:
+1. Build rough design on Figma
+2. Had to install/fix some dependencies (webpack, react versions) in order to get the deme/skeleton app to run. 
