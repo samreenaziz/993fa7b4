@@ -37,15 +37,18 @@ const callItemCardStyle = {
     fontFamily: "'Poppins', sans-serif",
     border: "1px solid #2ac41f",
     borderRadius: "0.50rem",
-    gap: "2rem",
+    gap: "1rem",
     alignItems: "center",
-    padding:"0.50rem 3rem",
+    padding:"0.50rem 0.50rem 0.50rem 1.50rem",
     margin: "0rem 2rem 1rem 2rem",
     justifyContent: "space-between",
+    backgroundColor:"white",
+    backgroundOpacity: "80%"
+
 };
 
 const dateStyle = {
-    color: "#c8c8c7",
+    color: "rgb(66 66 66)",
     fontWeight: "600",
     textTransform: "upperCase",
     fontSize: "1.5rem",
@@ -61,11 +64,11 @@ const callItemDetails = {
     fontSize: "1.5rem",
     fontFamily: "'Poppins', sans-serif",
     gap:"0.25rem",
-    alignItems:"center",
+    alignItems:"left",
 }
 
 
-export function CallListItem({call, archiveHandler, unarchiveHandler}) {
+export function CallListItem({call, archiveHandler, unarchiveHandler, showArchiveButton}) {
     const formattedDate = formatDate(call.created_at);
     const formattedTime = formatTime(call.created_at);
 
@@ -82,7 +85,7 @@ export function CallListItem({call, archiveHandler, unarchiveHandler}) {
                 break;
             case 'voicemail':
                 callIcon = <PermPhoneMsgSharpIcon style={{ fontSize: 50, color: "#ffbf00" }} />;
-                callDesc = <span style={{ color: "#ffbf00"}}>voicemail left on{" "}</span>
+                callDesc = <span style={{ color: "#c79500"}}>voicemail left on{" "}</span>
                 break;
             default:
                 callIcon = null;
@@ -104,10 +107,10 @@ export function CallListItem({call, archiveHandler, unarchiveHandler}) {
                                 </div>
                             </div>
                         </div>
-                        <div style={{ display: "flex", flexDirection: "column", fontSize: "1.5rem" }}>
+                        <div style={{ display: "flex", flexDirection: "column", color:"#424242", fontSize: "1.25rem"}}>
                             {formattedTime}
-                            <Button onClick={() => archiveHandler(call.id)}>Archive</Button>
-                            <Button onClick={() => unarchiveHandler(call.id)}>Unarchive</Button>
+                            {showArchiveButton && <Button styles={{color:"red"}} onClick={() => archiveHandler(call.id)}>Archive</Button>}
+                            {!showArchiveButton && <Button onClick={() => unarchiveHandler(call.id)}>Unarchive</Button>}
                         </div>
                     </div>
                 </div>
