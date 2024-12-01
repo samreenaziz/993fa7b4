@@ -3,3 +3,4 @@ dist
 yarn-error.log
 .DS_store
 package-lock.json
+//"webpack --mode production"
