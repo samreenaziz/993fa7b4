@@ -109,8 +109,8 @@ export function CallListItem({call, archiveHandler, unarchiveHandler, showArchiv
                         </div>
                         <div style={{ display: "flex", flexDirection: "column", color:"#424242", fontSize: "1.25rem"}}>
                             {formattedTime}
-                            {showArchiveButton && <Button styles={{color:"red"}} onClick={() => archiveHandler(call.id)}>Archive</Button>}
-                            {!showArchiveButton && <Button onClick={() => unarchiveHandler(call.id)}>Unarchive</Button>}
+                            {showArchiveButton && <Button style={{color:"#d3302f", fontSize: "1.15rem"}} onClick={() => archiveHandler(call.id)}>Archive</Button>}
+                            {!showArchiveButton && <Button style={{color:"#008001", fontSize: "1.15rem"}} onClick={() => unarchiveHandler(call.id)}>Unarchive</Button>}
                         </div>
                     </div>
                 </div>
