@@ -10,21 +10,3 @@ header svg {
   display: block;
   width: 50%; height: 50%;
 }
-
-@font-face{
-  font-family:'Antipasto';
-  src: url("../assets/fonts/antipasto/AntipastoPro-Light_trial.ttf")format("truetype");
-  font-weight: 400;
-}
-
-@font-face {
-  font-family: 'Antipasto';
-  src: url("../assets/fonts/antipasto/AntipastoPro-Medium_trial.ttf")format("truetype");
-  font-weight: 600;
-}
-
-@font-face{
-  font-family:'Antipasto';
-  src: url("../assets/fonts/antipasto/AntipastoPro-Bold_trial.ttf")format("truetype");
-  font-weight:700;
-}
