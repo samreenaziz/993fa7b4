@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import {CallListItem} from './components/CallListItem/CallListItem.jsx'
+import ActivityFeed from './components/ActivityFeed/ActivityFeed.jsx'
 
 import Header from './Header.jsx';
 
@@ -8,7 +8,7 @@ const App = () => {
   return (
     <div id='app' className='container'>
       <Header/>
-      <CallListItem/>
+      <ActivityFeed/>
       {/* <div className="container-view">Some activities should be here</div> */}
 
     </div>

@@ -1,10 +1,11 @@
-import React from 'react'
+import {useState, React} from 'react'
 import {callData} from '../../../lib/call_data.js'
-import "./CallListItem.css"
+import "../../css/CallListItem.css"
 import "../../css/app.css"
 import PhoneInTalkSharpIcon from '@mui/icons-material/PhoneInTalkSharp';
 import PhoneMissedSharpIcon from '@mui/icons-material/PhoneMissedSharp';
 import PermPhoneMsgSharpIcon from '@mui/icons-material/PermPhoneMsgSharp';
+import { Button } from "@mui/material";
 
 const formatDate = (timestamp) => {
 
@@ -64,61 +65,53 @@ const callItemDetails = {
 }
 
 
-export function CallListItem() {
-  return (
+export function CallListItem({call, archiveHandler, unarchiveHandler}) {
+    const formattedDate = formatDate(call.created_at);
+    const formattedTime = formatTime(call.created_at);
 
-    <div>
-        {callData.map((call)=>{
-            const formattedDate = formatDate(call.created_at);
-            const formattedTime = formatTime(call.created_at)
+    let callIcon;
+    let callDesc;
+        switch (call.call_type) {
+            case 'answered':
+                callIcon = <PhoneInTalkSharpIcon style={{ fontSize: 50, color: "green"}} />;
+                callDesc = <span style={{ color: "green"}}>answered call on{" "}</span>
+                break;
+            case 'missed':
+                callIcon = <PhoneMissedSharpIcon style={{ fontSize: 50, color: "red" }} />;
+                callDesc = <span style={{ color: "red"}}>tried to call on{" "}</span>
+                break;
+            case 'voicemail':
+                callIcon = <PermPhoneMsgSharpIcon style={{ fontSize: 50, color: "#ffbf00" }} />;
+                callDesc = <span style={{ color: "#ffbf00"}}>voicemail left on{" "}</span>
+                break;
+            default:
+                callIcon = null;
+                callDesc = null;
+            }
 
-            let callIcon;
-            let callDesc;
-                switch (call.call_type) {
-                    case 'answered':
-                        callIcon = <PhoneInTalkSharpIcon style={{ fontSize: 50, color: "green"}} />;
-                        callDesc = <span style={{ fontSize: "1.5rem", color: "green"}}>answered call on{" "}</span>
-                        break;
-                    case 'missed':
-                        callIcon = <PhoneMissedSharpIcon style={{ fontSize: 50, color: "red" }} />;
-                        callDesc = <span style={{ fontSize: "1.5rem", color: "red"}}>tried to call on{" "}</span>
-                        break;
-                    case 'voicemail':
-                        callIcon = <PermPhoneMsgSharpIcon style={{ fontSize: 50, color: "#ffbf00" }} />;
-                        callDesc = <span style={{ fontSize: "1.5rem", color: "#ffbf00"}}>voicemail left on{" "}</span>
-                        break;
-                    default:
-                        callIcon = null;
-                        callDesc = null;
-                }
-
-
-
-            return(
-            <div key={call.id}>
-                <div style={dateStyle}>
-                    {formattedDate}
-                </div>
-                <div style={callItemCardStyle}>
-                    <div style={{display:"flex", flexDirection:"row", gap:"1.5rem"}}>
-                        <div style={{display:"flex", alignItems:"center"}}>{callIcon}</div>
-                        <div style={callItemDetails}>
-                            <div style={{ color: "#424242", fontWeight: "600", fontSize:"2rem", fontFamily: "'Poppins', sans-serif"}}>{call.from}</div>
-                            <div style={{ color: "#424242", fontWeight: "400", fontFamily: "'Poppins', sans-serif"}}>{callDesc} {call.via}</div>
+            return (
+                <div>
+                    <div style={dateStyle}>{formattedDate}</div>
+                    <div style={callItemCardStyle}>
+                        <div style={{ display: "flex", flexDirection: "row", gap: "1.5rem" }}>
+                            <div style={{ display: "flex", alignItems: "center" }}>{callIcon}</div>
+                            <div style={callItemDetails}>
+                                <div style={{ color: "#424242", fontWeight: "600", fontSize: "2rem", fontFamily: "'Poppins', sans-serif" }}>
+                                    {call.from}
+                                </div>
+                                <div style={{ color: "#424242", fontSize: "1.25rem", fontWeight: "400", fontFamily: "'Poppins', sans-serif" }}>
+                                    {callDesc} {call.via}
+                                </div>
+                            </div>
+                        </div>
+                        <div style={{ display: "flex", flexDirection: "column", fontSize: "1.5rem" }}>
+                            {formattedTime}
+                            <Button onClick={() => archiveHandler(call.id)}>Archive</Button>
+                            <Button onClick={() => unarchiveHandler(call.id)}>Unarchive</Button>
                         </div>
                     </div>
-                    <div style={{fontSize: "1.5rem"}}>
-                        {formattedTime}
-                    </div>
-
-
-
-
                 </div>
-            </div>
-            )
-        })}
-    </div>
-  )
-}
+            );
+        };
 
+        export default CallListItem;
