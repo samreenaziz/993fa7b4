@@ -1,5 +1,4 @@
-import {useState, React} from 'react'
-import {callData} from '../../../lib/call_data.js'
+import {React} from 'react'
 import PhoneInTalkSharpIcon from '@mui/icons-material/PhoneInTalkSharp';
 import PhoneMissedSharpIcon from '@mui/icons-material/PhoneMissedSharp';
 import PermPhoneMsgSharpIcon from '@mui/icons-material/PermPhoneMsgSharp';

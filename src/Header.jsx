@@ -4,7 +4,7 @@ import CallNav from "../src/components/CallNav/CallNav.jsx"
 export default function Header({ setCallsView, callsView }) {
 
   return (
-    <header style={{padding:"2rem", display: "flex", flexDirection:"row", justifyContent:"space-between", alignItems:"center"}}>
+    <header style={{padding:"2rem 2rem 0rem 2rem", display: "flex", flexDirection:"row", justifyContent:"space-between", alignItems:"center"}}>
       <svg height='100' viewBox='0 0 486 168' version='1.1' xmlns='http://www.w3.org/2000/svg'>
         <g stroke='none' strokeWidth='1' fill='none' fillRule='evenodd'>
           <g transform='translate(207.000000, 24.000000)'>
