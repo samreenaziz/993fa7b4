@@ -66,7 +66,7 @@ const callItemDetails = {
 }
 
 
-export function CallListItem({call, archiveHandler, unarchiveHandler, showArchiveButton}) {
+export function CallListItem({call, archiveHandler, showArchiveButton}) {
     const formattedDate = formatDate(call.created_at);
     const formattedTime = formatTime(call.created_at);
 
@@ -108,7 +108,7 @@ export function CallListItem({call, archiveHandler, unarchiveHandler, showArchiv
                         <div style={{ display: "flex", flexDirection: "column", color:"#424242", fontSize: "1.25rem"}}>
                             {formattedTime}
                             {showArchiveButton && <Button style={{color:"#d3302f", fontSize: "1.15rem"}} onClick={() => archiveHandler(call.id)}>Archive</Button>}
-                            {!showArchiveButton && <Button style={{color:"#008001", fontSize: "1.15rem"}} onClick={() => unarchiveHandler(call.id)}>Unarchive</Button>}
+                            {!showArchiveButton && <Button style={{color:"#008001", fontSize: "1.15rem"}} onClick={() => archiveHandler(call.id)}>Unarchive</Button>}
                         </div>
                     </div>
                 </div>
