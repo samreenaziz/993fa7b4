@@ -16,6 +16,14 @@ const formatDate = (timestamp) => {
     return date.toLocaleDateString('en-US', options);
 };
 
+const formatDuration = (seconds) => {
+
+    const duration_minutes = Math.floor(seconds/60);
+    const residual_seconds = seconds % 60;
+
+    return `${duration_minutes} min${duration_minutes !== 1 ? "s" : ""} and ${residual_seconds} sec${residual_seconds !== 1 ? "s" : ""}`;
+}
+
 const formatTime = (timestamp) => {
 
     const date = new Date(timestamp);
@@ -40,7 +48,8 @@ const callItemCardStyle = {
     margin: "0rem 2rem 1rem 2rem",
     justifyContent: "space-between",
     backgroundColor:"white",
-    backgroundOpacity: "80%"
+    backgroundOpacity: "80%",
+    cursor: "pointer",
 
 };
 
@@ -68,6 +77,7 @@ const callItemDetails = {
 export function CallListItem({call, archiveHandler, showArchiveButton}) {
     const formattedDate = formatDate(call.created_at);
     const formattedTime = formatTime(call.created_at);
+    const formattedDuration = formatDuration(call.duration)
 
     let callIcon;
     let callDesc;
@@ -97,7 +107,7 @@ export function CallListItem({call, archiveHandler, showArchiveButton}) {
                             <div style={{ display: "flex", alignItems: "center" }}>{callIcon}</div>
                             <div style={callItemDetails}>
                                 <div style={{ color: "#424242", fontWeight: "600", fontSize: "2rem", fontFamily: "'Poppins', sans-serif" }}>
-                                    {call.from}
+                                    {call.from}{" "}<span style={{fontSize:"1.25rem", fontWeight:"400", color:"#42424285", paddingLeft:"1rem" }}>{formattedDuration}</span>
                                 </div>
                                 <div style={{ color: "#424242", fontSize: "1.25rem", fontWeight: "400", fontFamily: "'Poppins', sans-serif" }}>
                                     {callDesc} {call.via}
